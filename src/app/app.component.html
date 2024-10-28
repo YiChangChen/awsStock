@@ -3,3 +3,18 @@
 <label for="name">股票代號:</label>
 <input type="text" [(ngModel)]="stockNo" id="name" name="name" required minlength="4" maxlength="8" size="10" />
 <button (click)="getStock()">查詢</button>
+
+<p-table [value]="result" [tableStyle]="{ 'min-width': '50rem' }">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>date</th>
+            <th>close price</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-result>
+        <tr>
+            <td>{{ result.date }}</td>
+            <td>{{ result.closePrice }}</td>
+        </tr>
+    </ng-template>
+</p-table>

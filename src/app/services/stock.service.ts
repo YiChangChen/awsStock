@@ -13,7 +13,7 @@ export class StockService {
 
   getStock(model: Stock): Observable<StockInfo[]> {
     const url = 'https://qjeiwpbr5l.execute-api.us-east-1.amazonaws.com/default/twstock-lambda-3-12-4'
-
-    return this.http.post<StockInfo[]>(url, model);
+    let request = JSON.stringify(model)
+    return this.http.post<StockInfo[]>(url, request);
   }
 }
