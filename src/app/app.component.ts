@@ -3,7 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { StockService } from './services/stock.service';
 import { FormsModule } from '@angular/forms';
 import { Stock, StockInfo } from './model/stock';
-import { tap } from 'rxjs';
+import { concat, concatMap, tap } from 'rxjs';
 import { TableModule } from 'primeng/table';
 
 /**
@@ -29,10 +29,15 @@ export class AppComponent {
   getStock(){
     let model:Stock={
       stockNo: this.stockNo,
-      days: 3
+      days: 1
     }
-    this.stockService.getStock(model)
+
+    this.stockService.connect(model)
     .pipe(tap(res=>console.log(res)))
-    .subscribe(res=>this.result = res);
-  }
-}
+    .subscribe(res=>this.result.concat(res));
+
+
+    // this.stockService.getStock(model)
+    // .pipe(tap(res=>console.log(res)))
+    // .subscribe(res=>this.result = res);
+  }}
